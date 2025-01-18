@@ -1,0 +1,150 @@
+Automation daily Start-up
+1) Open CMD
+2) Do i) mwinit -o
+      ii) kinit
+3) Run command ->  ssh -l ludhayac -L 13390:localhost:3389 dev-dsk-ludhayac-1a-5b705478.eu-west-1.amazon.com
+4) Open remote desktop -> select Run "localhost:13390"
+5) Select "xllrdp" and enter the log in credentials 
+6) Open "Mate terminal" in remote desktop
+7) Run i) mwinit -o
+       ii) kinit 
+8) Run "/home/ludhayac/Desktop/workspace/AEEQAUIAutomation/src/AEEQAUIAutomationTests" to set directory path
+9) Run AAA command "/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py -a AEE_UI_Automation -t 14400"
+
+brazil-build clean && brazil-build
+
+10) Set the Stage version by- g2s2cli labelhistory AEEUIProd // to find the latest stage
+11) Select the latest Version- g2s2cli create AEEUIProd-XXX -p @AEEUIProd - enter the latest verion in XXX. for Ex : "g2s2cli create AEEUIProd-1486 -p @AEEUIProd"
+12) then run - g2s2cli createlabel AEEQA-heamanmy -s AEEUIProd-XXX " with the stage version created. For Ex: "g2s2cli createlabel AEEQA-ludhayac-s AEEUIProd-1486"
+
+g2s2cli labelhistory AEEQA-ludhayac
+g2s2cli labelhistory AEEUIProd
+g2s2cli create AEEUIProd-1986 -p @AEEUIProd (Its for creating)
+g2s2cli createlabel AEEQA-ludhayac -s AEEUIProd-1798   (its for checking)
+g2s2cli movelabel AEEQA-ludhayac -t AEEUIProd-2181 --allow-mutable 
+
+2217 -- prime
+g2s2cli create -p @AEEUIProd -- creating label automatically
+
+-Dg2s2Type=Author -Dg2s2Label=AEEQA-ludhayac -- last raised locator cr
+
+Prod label: -Dg2s2Type=READ -Dg2s2Label=AEEUIProd  
+
+2161using dummy
+
+2181 -prime
+
+Notes for your reference while raising CR:
+
+Commands:
+Locator CR - /apollo/env/G2S2CommandTools/bin/g2s2-post-review -s AEEUIProd-2217 --url https://g2s2-author.amazon.com (OR) g2s2postreview -s AEEUIProd-2008 --url https://g2s2-author.amazon.com
+Locator CR revision: /apollo/env/G2S2CommandTools/bin/g2s2-post-review -r CR-171749183 -s AEEUIProd-2217 --url https://g2s2-author.amazon.com
+Locator G2S2 Prodpush: g2s2cli promote -s AEEUIProd-2217 -t @AEEUIProd
+
+git diff
+git status 
+git add "URL" or git add .(this will add all file)
+git commit -m "New Testcase Writting for Prime"
+git commit -m "New Testcase Writting for Free Shipping Zone Page"
+OR from the 2nd revision we can use below amend command
+git commit --amend
+git update-index --assume-unchanged happytrails.env (in Test before git pull)
+git pull --rebase
+Test CR :-    cr --all
+Revision CR :-    cr -r<id> --all
+git switch mainline
+
+cr -r CR-171750322 --all
+
+g2s2cli promote -s AEEUIProd-2004 -t @AEEUIProd -- G2S2 prod push code
+
+for language:  -DTK:prefcountrycode=GB -DTK:preflanguagecode=en
+
+
+“?language=fr_BE-x-debug”
+
+
+-- Panther string ID 
+   ?language=fr_BE-x-debug
+?language=en_GB-x-debug
+
+
+-Dtestrail.reportToTestRail=true -Dtestrail.testRunId=20245  #to pass the case checkbox
+
+
+
+
+if code not running
+> Happy trails - " export APOLLO_STARTUP_ENVIRONMENT_ROOT=${PWD}/../../AAA/AEEQAUIAutomationTests-${USER} " paste this in happytrails notepad
+
+
+if directory path is not set using the run code do this
+> cd src
+> cd AEEQAUIAutomationTests/
+
+To switch to other path folder 
+> cd ../AEEQAUIAutomationFrameworkCore/
+
+AEEQAUSIAddon->Ui->page modules
+
+AutomationAddons->Ui pagemodels->locators will be present for all workstreams
+
+
+
+
+To see the locators -> Addons > Pagemodels > workstream 
+
+brazil ws sync
+
+G2S2 Link -- https://g2s2-editor.amazon.com/editor/tableview#n=1000&t=diamond_locators&sv=@AEEUIProd
+
+-> git pull
+ -> bb clean
+-> git stash (to delete all changes) 
+-> git diff
+-> git status
+-> git add filename
+-> git rm --cached"file name"
+-> git status
+-> git commit -m "New Testcase in Your Accounts"
+-> cr --all
+for revision cr -r CRno--all(to raise 2nd revision of already created CR)
+
+cr -r CR-94221946
+-Dtestrail.reportToTestRail=true -Dtestrail.testRunId=15326  -- To run testcase
+
+
+https://code.amazon.com/packages/AEEQAUIAutomationTests/blobs/mainline/--/tst/com/amazon/aeeqa/ui/tests/countryexpansion/CartPageTest.java --Test
+https://code.amazon.com/packages/AEEQAUIAutomationAddOns/blobs/mainline/--/src/com/amazon/aeeqa/ui/pagemodels/cart/CartPage.java --Addons
+
+In git commit -m If conflict occurs
+clear the error 
+git status
+git commit -m "test" --commit the changes then give
+git rebase --continue
+if colour screen comes :wq
+git pull --rebase
+Please ensure that you are in the latest version after pulling the changes by using this command line in terminal “bws show”. [This command will fetch the details of current stage number in your workspace]
+
+
+-------------------
+git checkout HEAD - to get last commit
+
+
+Other commands for sync
+
+brazil-package-cache stop
+rm ~/brazil-pkg-cache/daemon-lck
+brazil-package-cache start
+brazil ws sync --md
+
+
+https://w.amazon.com/bin/view/AEE/QA_Process/UI_Automation/Development_Guide/SeeBrowserActions/
+
+Steps in order:
+
+1. Install IDE of your choice on your local
+
+2. https://w.amazon.com/bin/view/AWSCAPSSupport/NewHireGuide/NinjaDevSync
+
+3. https://w.amazon.com/bin/view/AEE/QA_Process/UI_Automation/Development_Guide/SeeBrowserActions/

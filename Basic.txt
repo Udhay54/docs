@@ -1,0 +1,76 @@
+/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py -a AEE_UI_Automation -t 14400
+
+brazil-build clean && brazil-build 
+
+ssh -l ludhayac -L 13390:localhost:3389 dev-dsk-ludhayac-1a-5b705478.eu-west-1.amazon.com
+
+AIS-sourceCountry:US-exportableCountry:IL-asinCondition:aisEligibleForFreeShippingRetailBelowThresholdLowValue
+
+AIS-sourceCountry:US-exportableCountry:PS-asinCondition:basicAisFreeShippingConditions-productGroupType:gl_pc-aisEligibleForFreeShipping
+
+
+export APOLLO_STARTUP_ENVIRONMENT_ROOT=${PWD}/../../AAA/AEEQAUIAutomationTests-${USER}
+
+
+-DTK:prefcountrycode=GB -DTK:preflanguagecode=en
+
+SleepUtil.sleep(1000);
+
+File transfer:
+scp -r ludhayac@dev-dsk-ludhayac-1a-5b705478.eu-west-1.amazon.com:///local/home/ludhayac/Desktop/AISnew/build/AEEQAUIAutomationTests/AEEQAUIAutomationTests-1.1/AL2_x86_64/DEV.STD.PTHREAD/build/brazil-unit-tests/suite1_test1_results.html C:\Users\ludhayac\Desktop\Auto
+
+AIS running code:
+bin/singletest.sh com.amazon.aeeqa.ui.tests.businessutils.ais.JumpinGlobalizationTest testFreeShippingMessageAboveThresholdNextToPriceInDP -Dbrowser=chrome -DexportCountryCode=OM -Dcountry=AE -Drealm=EUAmazon -Durl=https://www.amazon.ae -Dheadless=false -DTK-s3BucketName=ais-testdata-list -DTK-s3FileName=AE_Jumpin/AE_Jumpin_AT_Sample.csv -DTK-odinMaterialSet=com.amazon.access.aee-qa-aee-qa-WDGASINS-2 -DrunWithUserDefinedAccount=true -DrunWithListOfTestData=true -DTK:userEmail=ludhayac+us6@amazon.com -DTK:userPassword=1234567 -Dg2s2Type=READ -Dg2s2Label=AEEUIProd -Dtestrail.reportToTestRail=true -Dtestrail.testRunId=22699
+
+
+bin/singletest.sh com.amazon.aeeqa.ui.tests.countryexpansion.DetailPageTest testFreeShippingMessageFor3PASIN -Dbrowser=Chrome -Dcountry=BE -Drealm=EUAmazon -Dlanguage=fr -Durl=https://www.amazon.com.be -Dheadless=false
+
+
+
+AIS1 -- cr raised
+AIS2 -- shruthika intake
+AIS3 -- cr raised 
+AIS4 -- Ashwin intake
+AIS5 -- Regression (Not for commit)
+apr -- P1
+AIS7 -- new
+AODsec -- run for jumpin
+searchsec -- for weblab
+
+C265492
+
+------------------
+
+@BeforeMethod(alwaysRun = true)
+    public void overrideWeblab() {
+        //TODO: Forcing Experimental weblab SEARCH_NAV_393862 to C. https://issues.amazon.com/issues/D36348120.
+        addWeblabCookie(WeblabConstants.SEARCH_NAV_393862);
+        //TODO: Forcing Experimental weblab SEARCH_458435 to C. https://issues.amazon.com/issues/D72651325.
+        addWeblabCookie(WeblabConstants.SEARCH_458435);
+        //TODO: Forcing Experimental weblab SEARCH_782009 to C. https://sim.amazon.com/D128914158.
+        addWeblabCookie(WeblabConstants.SEARCH_782009);
+    }
+
+
+editing merge 3rd option
+
+clear all
+
+give some meaning name
+
+CR: *CR link*
+
+
+-------------------------------
+
+ssh -N -R 9515:localhost:9515 ludhayac@dev-dsk-ludhayac-1a-5b705478.eu-west-1.amazon.com
+
+
+bin/singletest.sh com.amazon.aeeqa.ui.tests.countryexpansion.DetailPageTest testMBCOfferPopover -DTK:prefcountrycode=GB -DTK:preflanguagecode=en -Dcountry=BE -Drealm=EUAmazon -Dlanguage=en -Durl=https://www.amazon.com.be -Dg2s2Type=READ -Dg2s2Label=AEEUIProd -DTK-remote-webdriver-url=http://localhost:9515 -DTK-browser-name=chrome -DTK-headless=false
+
+
+
+[August 23, 2024, 11:56 AM] M V, Priyankha: cd workspace
+[August 23, 2024, 11:56 AM] M V, Priyankha: cd AEEQAUIAutomation
+[August 23, 2024, 11:56 AM] M V, Priyankha: cd src
+[August 23, 2024, 11:56 AM] M V, Priyankha: cd AEEQAUIAutomationTests
